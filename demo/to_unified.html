@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../lib/emoji.js"></script>
+    <link rel="stylesheet" href="emoji.css"/>
+    <style>
+        body {
+            padding: 50px;
+        }
+        hr {
+            height: 1px;
+            margin: 30px 0;
+            border: 0;
+            background-color: rgba(0, 0, 0, .3);
+        }
+        div {
+            margin-bottom: 30px;
+        }
+        #before:before,
+        #after:before,
+        #before2:before,
+        #after2:before {
+            width: 100%;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(0, 0, 0, .3);
+            line-height: 20px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        #before:before, #before2:before {
+            content: 'before';
+        }
+        #after:before, #after2:before {
+            content: 'after';
+        }
+    </style>
+</head>
+<body onLoad="init()">
+<h2>To unified</h2>
+<div id="before"></div>
+<div id="after"></div>
+<h2>To colon</h2>
+<div id="before2"></div>
+<div id="after2"></div>
+<script>
+    var long = "Lorem ipsum dolor sit amet, consectetur :footprints: elit. Proin :cop::skin-tone-6: luctus.";
+    long += " Maecenas hendrerit arcu quam, ultrices rhoncus lacus. Nunc ultricies :joy: sit amet metus";
+    long += " feugiat quis sagittis risus blandit. Nunc :moon: eros quam, sit amet fringilla felis. Donec";
+
+    emoji.img_sets = {
+        'apple': {
+            'path': '../build/emoji-data/img-apple-64/',
+            'sheet': '../build/emoji-data/sheet_apple_64.png'
+        }
+    };
+
+    function init() {
+        toUnified();
+        fromColon()
+    }
+
+    function toUnified() {
+        out(long, 'before');
+        emoji.change_replace_mode('unified');
+        console.debug(emoji.replace_mode);
+        var outText = emoji.replace_colons(long);
+        out(outText, 'after');
+    }
+
+    function fromColon() {
+        out(long, 'before2');
+        emoji.change_replace_mode('css');
+        console.debug(emoji.replace_mode);
+        var outText = emoji.replace_colons(long);
+        out(outText, 'after2');
+    }
+
+    function out(str, id){
+        var out = document.getElementById(id);
+        var div = document.createElement('DIV');
+        div.textContent = str;
+        div.innerHTML = str;
+        out.appendChild(div);
+    }
+
+</script>
+</body>
+</html>

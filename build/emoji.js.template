@@ -163,6 +163,19 @@ function emoji(){}
 
 	/**
 	 * @memberof emoji
+   * @param {string} str A string to change emoji.replace_mode
+	 */
+	emoji.change_replace_mode = function(str){
+    emoji.init_env();
+
+		var enabledReplaceModes = ['img', 'css', 'unified', 'google', 'softbank'];
+		if (enabledReplaceModes.includes(str)) {
+			emoji.replace_mode = str;
+		}
+	};
+
+	/**
+	 * @memberof emoji
 	 * @param {string} str A string potentially containing unified unicode
 	 * emoticons. (ie. 😄)
 	 *
@@ -206,7 +219,7 @@ function emoji(){}
 		}
 
 		// deal with simple modes (colons and text) first
-		wrapper = wrapper || '';
+    wrapper = wrapper || emoji.include_text ? ':' : '';
 		if (emoji.colons_mode) return ':'+emoji.data[idx][3][0]+':'+extra;
 		var text_name = (actual) ? wrapper+actual+wrapper : emoji.data[idx][8] || wrapper+emoji.data[idx][3][0]+wrapper;
 		if (emoji.text_mode) return text_name + extra;
@@ -223,7 +236,7 @@ function emoji(){}
 		// use the variation image. otherwise, return it as a separate image (already calculated in `extra`).
 		// first we set up the params we'll use if we can't use a variation.
 		var img = emoji.data[idx][7] || emoji.img_sets[emoji.img_set].path+idx+'.png';
-		var title = emoji.include_title ? ' title="'+(actual || emoji.data[idx][3][0])+'"' : '';
+    var title = emoji.include_title ? ' title="'+wrapper+(actual || emoji.data[idx][3][0])+wrapper+'"' : '';
 		var text  = emoji.include_text  ? wrapper+(actual || emoji.data[idx][3][0])+wrapper : '';
 		var px = emoji.data[idx][4];
 		var py = emoji.data[idx][5];
