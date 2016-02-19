@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/iamcal/js-emoji.git"
+    "url": "git://github.com/actorapp/js-emoji.git"
   },
   "keywords": [
     "emoji",
@@ -35,7 +35,7 @@
   "author": "Cal Henderson <cal@iamcal.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/iamcal/js-emoji/issues"
+    "url": "https://github.com/actorapp/js-emoji/issues"
   },
-  "homepage": "https://github.com/iamcal/js-emoji"
+  "homepage": "https://github.com/actorapp/js-emoji"
 }
